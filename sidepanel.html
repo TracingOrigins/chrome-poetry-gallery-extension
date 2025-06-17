@@ -2,8 +2,9 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>诗词长廊</title>
+    <title>Poetry Gallery - 诗词长廊</title>
     <link rel="stylesheet" href="sidepanel.css">
+    <script src="lib/html2canvas.min.js"></script>
 </head>
 <body>
     <div class="container">
@@ -33,11 +34,17 @@
                             </svg>
                         </button>
                         <div class="more-dropdown">
-                            <button id="exportButton" class="dropdown-item" title="导出">
-                                <svg viewBox="0 0 24 24">
-                                    <path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm4 18H6V4h7v5h5v11zM8 13.01l1.41 1.41L11 12.84V17h2v-4.16l1.59 1.59L16 13.01 12.01 9 8 13.01z"/>
+                            <button id="exportButton" class="dropdown-item">
+                                <svg class="dropdown-icon" viewBox="0 0 24 24">
+                                    <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/>
                                 </svg>
-                                <span>导出</span>
+                                导出为Markdown
+                            </button>
+                            <button id="exportImageButton" class="dropdown-item">
+                                <svg class="dropdown-icon" viewBox="0 0 24 24">
+                                    <path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/>
+                                </svg>
+                                导出为图片
                             </button>
                         </div>
                     </div>

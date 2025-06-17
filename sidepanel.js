@@ -14,6 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const authorFilter = document.getElementById('authorFilter');
     const typeFilter = document.getElementById('typeFilter');
     const exportButton = document.getElementById('exportButton');
+    const exportImageButton = document.getElementById('exportImageButton');
     const searchButton = document.getElementById('searchButton');
     const filterButton = document.getElementById('filterButton');
     const moreButton = document.getElementById('moreButton');
@@ -131,6 +132,15 @@ document.addEventListener('DOMContentLoaded', () => {
         exportButton.addEventListener('click', (e) => {
             e.stopPropagation();
             exportToMarkdown();
+            moreDropdown.classList.remove('show');
+        });
+    }
+
+    // 监听导出图片按钮点击
+    if (exportImageButton) {
+        exportImageButton.addEventListener('click', (e) => {
+            e.stopPropagation();
+            exportToImage();
             moreDropdown.classList.remove('show');
         });
     }
@@ -326,6 +336,81 @@ document.addEventListener('DOMContentLoaded', () => {
         link.click();
         document.body.removeChild(link);
         URL.revokeObjectURL(link.href);
+    }
+
+    // 导出为图片
+    function exportToImage() {
+        if (filteredPoems.length === 0) {
+            showModal('没有可导出的诗词');
+            return;
+        }
+
+        const poem = filteredPoems[currentPage];
+        if (!poem) {
+            showModal('无法获取诗词内容');
+            return;
+        }
+
+        // 获取当前诗词卡片的样式
+        const poemCard = document.querySelector('.poem-card');
+        if (!poemCard) {
+            showModal('无法获取诗词样式');
+            return;
+        }
+
+        try {
+            // 创建一个临时容器来放置要导出的内容
+            const container = document.createElement('div');
+            container.style.position = 'absolute';
+            container.style.left = '-9999px';
+            container.style.top = '-9999px';
+            // 使用当前诗词卡片的宽度
+            container.style.width = poemCard.offsetWidth + 'px';
+            container.style.padding = '20px';
+            container.style.backgroundColor = getComputedStyle(document.body).getPropertyValue('--bg-color');
+            container.style.color = getComputedStyle(document.body).getPropertyValue('--text-color');
+            container.style.fontFamily = getComputedStyle(document.body).getPropertyValue('--font-family');
+
+            // 克隆诗词卡片并添加到容器中
+            const clonedCard = poemCard.cloneNode(true);
+            container.appendChild(clonedCard);
+            document.body.appendChild(container);
+
+            // 检查html2canvas是否可用
+            if (typeof html2canvas === 'undefined') {
+                throw new Error('html2canvas库未加载');
+            }
+
+            // 使用html2canvas将内容转换为图片
+            html2canvas(container, {
+                backgroundColor: getComputedStyle(document.body).getPropertyValue('--bg-color'),
+                scale: 2, // 提高图片质量
+                logging: true, // 启用日志
+                useCORS: true,
+                allowTaint: true,
+                onclone: (clonedDoc) => {
+                    console.log('克隆文档成功');
+                }
+            }).then(canvas => {
+                console.log('Canvas创建成功');
+                // 创建下载链接
+                const link = document.createElement('a');
+                link.download = `${poem.title}.png`;
+                link.href = canvas.toDataURL('image/png');
+                link.click();
+                console.log('图片下载已触发');
+
+                // 清理临时元素
+                document.body.removeChild(container);
+            }).catch(error => {
+                console.error('导出图片失败:', error);
+                showModal('导出图片失败：' + error.message);
+                document.body.removeChild(container);
+            });
+        } catch (error) {
+            console.error('导出过程出错:', error);
+            showModal('导出过程出错：' + error.message);
+        }
     }
 
     // 显示模态框

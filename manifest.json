@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "Poetry Gallery - 诗词长廊",
   "description": "一个优雅的 Chrome 浏览器扩展，让您在浏览网页时也能感受中国古典诗词之美。",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "permissions": [
     "sidePanel"
   ],
@@ -19,5 +19,9 @@
   },
   "background": {
     "service_worker": "background.js"
-  }
+  },
+  "web_accessible_resources": [{
+  "resources": ["data/poems.json", "lib/*"],
+  "matches": ["<all_urls>"]
+}]
 } 
