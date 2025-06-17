@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>诗词长廊</title>
+    <link rel="stylesheet" href="sidepanel.css">
+</head>
+<body>
+    <div class="container">
+        <div class="search-container">
+            <div class="header">
+                <h1 class="title">诗词长廊</h1>
+                <div class="action-buttons">
+                    <button id="searchButton" class="action-button" title="搜索">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+                        </svg>
+                    </button>
+                    <button id="filterButton" class="action-button" title="筛选">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M10 18h4v-2h-4v2zM3 6v2h18V6H3zm3 7h12v-2H6v2z"/>
+                        </svg>
+                    </button>
+                    <button id="clearButton" class="action-button" title="清空">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/>
+                        </svg>
+                    </button>
+                    <div class="more-menu">
+                        <button id="moreButton" class="action-button" title="更多">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/>
+                            </svg>
+                        </button>
+                        <div class="more-dropdown">
+                            <button id="exportButton" class="dropdown-item" title="导出">
+                                <svg viewBox="0 0 24 24">
+                                    <path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm4 18H6V4h7v5h5v11zM8 13.01l1.41 1.41L11 12.84V17h2v-4.16l1.59 1.59L16 13.01 12.01 9 8 13.01z"/>
+                                </svg>
+                                <span>导出</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="searchBox" class="search-box" style="display: none;">
+                <input type="text" id="searchInput" class="url-input" placeholder="请输入关键词...">
+            </div>
+            <div id="filterBox" class="filter-container" style="display: none;">
+                <div class="filter-row">
+                    <div class="filter-group">
+                        <span class="filter-label">朝代</span>
+                        <select id="dynastyFilter" class="filter-select">
+                            <option value="">全部</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <span class="filter-label">作者</span>
+                        <select id="authorFilter" class="filter-select">
+                            <option value="">全部</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <span class="filter-label">类型</span>
+                        <select id="typeFilter" class="filter-select">
+                            <option value="">全部</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <ul id="poemList" class="poem-list"></ul>
+        <div class="bottom-nav">
+            <button id="prevPoemButton" class="nav-button" title="上一首">
+                <svg viewBox="0 0 24 24">
+                    <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
+                </svg>
+            </button>
+            <div class="page-info">
+                <input type="number" id="pageInput" class="page-input" min="1" value="1">
+                <span class="page-separator">/</span>
+                <span id="totalPages" class="total-pages">1</span>
+            </div>
+            <button id="nextPoemButton" class="nav-button" title="下一首">
+                <svg viewBox="0 0 24 24">
+                    <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/>
+                </svg>
+            </button>
+        </div>
+    </div>
+    <script src="sidepanel.js"></script>
+</body>
+</html> 

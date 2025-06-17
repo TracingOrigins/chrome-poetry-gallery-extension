@@ -1,0 +1,708 @@
+:root {
+    --bg-color: #ffffff;
+    --text-color: #333333;
+    --border-color: #e0e0e0;
+    --hover-color: #f5f5f5;
+    --shadow-color: rgba(0, 0, 0, 0.1);
+    --filter-bg: #f8f9fa;
+    --filter-border: #e9ecef;
+    --filter-hover: #e9ecef;
+    --filter-active: #007bff;
+    --filter-text: #495057;
+    --filter-label: #6c757d;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --bg-color: #1a1a1a;
+        --text-color: #e0e0e0;
+        --border-color: #333333;
+        --hover-color: #2a2a2a;
+        --shadow-color: rgba(0, 0, 0, 0.3);
+        --filter-bg: #2d2d2d;
+        --filter-border: #404040;
+        --filter-hover: #404040;
+        --filter-active: #0d6efd;
+        --filter-text: #e0e0e0;
+        --filter-label: #a0a0a0;
+    }
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: "Microsoft YaHei", "PingFang SC", "Hiragino Sans GB", sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+}
+
+.container {
+    padding: 16px 16px 0 16px;
+    /* max-width: 800px; */
+    margin: 0 auto;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 16px;
+    margin-bottom: 16px;
+}
+
+.title {
+    font-size: 22px;
+    font-weight: 600;
+    margin: 0;
+    color: var(--text-color);
+    position: relative;
+    padding-left: 18px;
+    letter-spacing: 2px;
+    font-family: "STKaiti", "KaiTi", "Microsoft YaHei", serif;
+}
+
+.title::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 4px;
+    background: linear-gradient(to bottom, #bfa46b, #8c6b29);
+    border-radius: 2px;
+}
+
+.title::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -8px;
+    width: 48px;
+    height: 2px;
+    background-color: #bfa46b;
+    opacity: 0.5;
+    border-radius: 1px;
+}
+.action-buttons {
+    display: flex;
+    gap: 8px;
+}
+
+.action-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    color: var(--text-color);
+    background-color: var(--filter-bg);
+    border: 1px solid var(--filter-border);
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.action-button:hover {
+    background-color: var(--filter-hover);
+    transform: translateY(-1px);
+}
+
+.action-button svg {
+    width: 20px;
+    height: 20px;
+    fill: currentColor;
+}
+
+.search-container {
+    position: sticky;
+    background-color: var(--bg-color);
+    z-index: 100;
+    border-bottom: 1px solid var(--border-color);
+    box-shadow: 0 2px 4px var(--shadow-color);
+}
+
+.search-box {
+    margin: 0 0 16px 0;
+    padding: 0 16px;
+}
+
+.url-input {
+    width: 100%;
+    padding: 10px 16px;
+    font-size: 14px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+    box-shadow: 0 2px 4px var(--shadow-color);
+}
+
+.url-input:focus {
+    outline: none;
+    border-color: var(--filter-active);
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+}
+
+.url-input::placeholder {
+    color: var(--filter-label);
+    opacity: 0.7;
+}
+
+.filter-container {
+    margin: 0 16px 16px 16px;
+    padding: 16px;
+    background-color: var(--filter-bg);
+    border-radius: 8px;
+    border: 1px solid var(--filter-border);
+    box-shadow: 0 2px 4px var(--shadow-color);
+    width: calc(100% - 32px);
+    box-sizing: border-box;
+}
+
+.filter-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+    width: 100%;
+}
+
+.filter-group {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    flex: 1;
+    min-width: 0;
+}
+
+.filter-label {
+    font-size: 13px;
+    color: var(--filter-label);
+    white-space: nowrap;
+    min-width: 36px;
+    flex-shrink: 0;
+}
+
+.filter-select {
+    flex: 1;
+    min-width: 0;
+    padding: 8px 12px;
+    font-size: 13px;
+    border: 1px solid var(--filter-border);
+    border-radius: 6px;
+    background-color: var(--bg-color);
+    color: var(--filter-text);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%236c757d' d='M6 8.825L1.175 4 2.05 3.125 6 7.075 9.95 3.125 10.825 4z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    padding-right: 32px;
+    box-shadow: 0 1px 2px var(--shadow-color);
+    box-sizing: border-box;
+}
+
+/* 下拉框选项样式 */
+.filter-select option {
+    background-color: var(--bg-color);
+    color: var(--filter-text);
+    padding: 8px;
+}
+
+/* 下拉框滚动条样式 */
+.filter-select::-webkit-scrollbar {
+    width: 8px;
+}
+
+.filter-select::-webkit-scrollbar-track {
+    background: var(--filter-bg);
+    border-radius: 4px;
+}
+
+.filter-select::-webkit-scrollbar-thumb {
+    background: var(--filter-border);
+    border-radius: 4px;
+}
+
+.filter-select::-webkit-scrollbar-thumb:hover {
+    background: var(--filter-hover);
+}
+
+.filter-select:hover {
+    border-color: var(--filter-hover);
+    box-shadow: 0 2px 4px var(--shadow-color);
+}
+
+.filter-select:focus {
+    outline: none;
+    border-color: var(--filter-active);
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+}
+
+.poem-list {
+    list-style: none;
+    padding: 16px 0;
+    margin: 0;
+    margin-bottom: 60px;
+}
+
+.poem-card {
+    background-color: var(--bg-color);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 20px;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px var(--shadow-color);
+    display: flex;
+    flex-direction: column;
+    min-height: calc(100vh - 160px);
+    box-sizing: border-box;
+    overflow: visible;
+    position: relative;
+}
+
+.poem-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px var(--shadow-color);
+}
+
+.poem-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin: 0 0 8px 0;
+    color: var(--text-color);
+    text-align: center;
+    padding: 0 10px;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+.poem-author {
+    font-size: 16px;
+    color: var(--filter-label);
+    margin: 0 0 16px 0;
+    text-align: center;
+    padding: 0 10px;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+.poem-content {
+    font-size: 18px;
+    line-height: 1.8;
+    margin: 0 0 24px 0;
+    text-align: center;
+    /* white-space: pre-line; */
+    overflow-y: auto;
+    max-height: 30%;
+    padding: 0 16px;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+.poem-line {
+    display: inline-block;
+    text-align: left;
+    margin: 0 auto;
+}
+
+.poem-line-wrapper {
+    text-align: center;
+    margin: 8px 0;
+}
+
+.poem-translation {
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--filter-label);
+    margin: 0 0 24px 0;
+    padding: 16px;
+    background-color: var(--filter-bg);
+    border-radius: 8px;
+    /* white-space: pre-line; */
+    overflow-y: auto;
+    max-height: 30%;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+ .poem-line-wrapper {
+    text-align: center;
+    margin: 8px 0;
+}
+
+.poem-translation .poem-line {
+    display: inline-block;
+    text-align: left;
+    margin: 0 auto;
+}
+
+.poem-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 0;
+    padding: 16px 0;
+    justify-content: center;
+}
+
+.poem-tag {
+    font-size: 12px;
+    padding: 4px 12px;
+    background-color: var(--filter-bg);
+    border: 1px solid var(--filter-border);
+    border-radius: 16px;
+    color: var(--filter-text);
+    transition: all 0.2s ease;
+    text-align: center;
+}
+
+.poem-tag:hover {
+    background-color: var(--filter-hover);
+    transform: translateY(-1px);
+}
+
+.action-container {
+    display: flex;
+    justify-content: center;
+    margin: 32px 0;
+}
+
+.export-button {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 24px;
+    font-size: 15px;
+    color: var(--filter-text);
+    background-color: var(--filter-bg);
+    border: 1px solid var(--filter-border);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 4px var(--shadow-color);
+}
+
+.export-button:hover {
+    background-color: var(--filter-hover);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px var(--shadow-color);
+}
+
+.export-button:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 4px var(--shadow-color);
+}
+
+.export-button svg {
+    width: 16px;
+    height: 16px;
+    fill: currentColor;
+}
+
+@media (max-width: 600px) {
+    .container {
+        padding: 12px 12px 0 12px;
+    }
+
+    .filter-container {
+        width: calc(100% - 24px);
+    }
+
+    .filter-row {
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .filter-group {
+        width: 100%;
+    }
+
+    .poem-title {
+        font-size: 20px;
+    }
+
+    .poem-content {
+        font-size: 16px;
+    }
+
+    .poem-translation {
+        font-size: 14px;
+        padding: 12px;
+    }
+}
+
+.pagination-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+    padding: 16px 0;
+    border-top: 1px solid var(--border-color);
+    background-color: var(--bg-color);
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 10;
+}
+
+.pagination-button {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    font-size: 14px;
+    color: var(--text-color);
+    background-color: var(--filter-bg);
+    border: 1px solid var(--filter-border);
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.pagination-button:hover:not(:disabled) {
+    background-color: var(--filter-hover);
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px var(--shadow-color);
+}
+
+.pagination-button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.pagination-button svg {
+    width: 16px;
+    height: 16px;
+    fill: currentColor;
+}
+
+.page-info {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 14px;
+    color: var(--text-color);
+}
+
+/* 页码输入框样式 */
+.page-input {
+    width: 60px;
+    height: 32px;
+    padding: 0 8px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-size: 14px;
+    text-align: center;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.page-input::-webkit-inner-spin-button,
+.page-input::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.page-input[type=number] {
+    -moz-appearance: textfield;
+}
+
+.page-separator {
+    color: var(--filter-label);
+}
+
+.total-pages {
+    min-width: 24px;
+    text-align: center;
+}
+
+.empty-message {
+    text-align: center;
+    padding: 32px;
+    color: var(--filter-label);
+    font-size: 16px;
+    background-color: var(--filter-bg);
+    border-radius: 8px;
+    margin: 16px 0;
+}
+
+/* 自定义滚动条样式 */
+.poem-content::-webkit-scrollbar,
+.poem-translation::-webkit-scrollbar {
+    width: 6px;
+}
+
+.poem-content::-webkit-scrollbar-track,
+.poem-translation::-webkit-scrollbar-track {
+    background: var(--filter-bg);
+    border-radius: 3px;
+}
+
+.poem-content::-webkit-scrollbar-thumb,
+.poem-translation::-webkit-scrollbar-thumb {
+    background: var(--filter-border);
+    border-radius: 3px;
+}
+
+.poem-content::-webkit-scrollbar-thumb:hover,
+.poem-translation::-webkit-scrollbar-thumb:hover {
+    background: var(--filter-hover);
+}
+
+/* 移除悬浮按钮样式 */
+/* .floating-nav {
+    display: none;
+} */
+
+/* 弹框样式 */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background-color: var(--bg-color);
+    padding: 24px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px var(--shadow-color);
+    width: 280px;
+    text-align: center;
+    position: relative;
+    border: 1px solid var(--border-color);
+}
+
+.modal-message {
+    margin: 0 0 24px 0;
+    color: var(--text-color);
+    font-size: 15px;
+    line-height: 1.5;
+}
+
+.modal-button {
+    padding: 8px 24px;
+    background-color: var(--filter-active);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    min-width: 80px;
+}
+
+.modal-button:hover {
+    opacity: 0.9;
+}
+
+.modal-button:active {
+    opacity: 0.8;
+}
+
+.more-menu {
+    position: relative;
+}
+
+.more-dropdown {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    margin-top: 8px;
+    background-color: var(--bg-color);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    box-shadow: 0 4px 12px var(--shadow-color);
+    min-width: 120px;
+    display: none;
+    z-index: 1000;
+}
+
+.more-dropdown.show {
+    display: block;
+}
+
+.dropdown-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+    padding: 8px 16px;
+    border: none;
+    background: none;
+    color: var(--text-color);
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-align: left;
+}
+
+.dropdown-item:hover {
+    background-color: var(--hover-color);
+}
+
+.dropdown-item svg {
+    width: 18px;
+    height: 18px;
+    fill: currentColor;
+}
+
+.bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+    padding: 12px;
+    background-color: var(--bg-color);
+    border-top: 1px solid var(--border-color);
+    box-shadow: 0 -2px 8px var(--shadow-color);
+    z-index: 100;
+}
+
+.nav-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    padding: 0;
+    color: var(--text-color);
+    background-color: var(--filter-bg);
+    border: 1px solid var(--filter-border);
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.nav-button:hover {
+    background-color: var(--filter-hover);
+    transform: translateY(-1px);
+}
+
+.nav-button:active {
+    transform: translateY(0);
+}
+
+.nav-button svg {
+    width: 24px;
+    height: 24px;
+    fill: currentColor;
+} 
